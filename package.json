@@ -1,0 +1,11 @@
+{
+  "name": "learnforge-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Learnforge — Socratic AI Learning Platform Monorepo",
+  "scripts": {
+    "install:all": "npm --prefix backend-node install && npm --prefix frontend install",
+    "dev:backend": "npm --prefix backend-node run dev",
+    "dev:frontend": "npm --prefix frontend run dev"
+  }
+}

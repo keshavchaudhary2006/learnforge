@@ -1,0 +1,25 @@
+# FastAPI & Server
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+
+# LangChain & AI Orchestration
+langchain>=0.2.6
+langchain-community>=0.2.6
+langchain-core>=0.2.10
+langchain-openai>=0.1.13
+langchain-chroma>=0.1.2
+langchain-text-splitters>=0.2.0
+tiktoken>=0.7.0
+
+# Vector Database
+chromadb>=0.5.3
+
+# PDF Processing & Generation
+pypdf>=4.2.0
+reportlab>=4.2.0
+
+# Utilities & Networking
+python-dotenv>=1.0.1
+httpx>=0.27.0

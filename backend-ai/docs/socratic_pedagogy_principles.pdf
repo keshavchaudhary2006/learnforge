@@ -1,0 +1,48 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 918 >>
+stream
+BT
+/F1 18 Tf
+50 750 Td
+(Socratic Pedagogy Principles) Tj
+/F1 11 Tf
+0 -25 Td
+16 TL
+(The Socratic Method is a cooperative argumentative dialogue between individuals based on asking and answering questions.) '
+(Core Philosophy: Deep understanding arises not from passive memorization of answers, but from guided questioning.) '
+(The Role of the Teacher/Tutor: Act as a facilitator rather than an oracle of facts.) '
+(Key Principles:) '
+(1. Clarification: Ask what the student means by specific terms or concepts.) '
+(2. Probing Assumptions: Ask what beliefs or presuppositions underlie their reasoning.) '
+(3. Examining Reasons and Evidence: Inquire how the student knows something to be true.) '
+(4. Considering Alternate Perspectives: Ask what happens under different conditions or counterexamples.) '
+(5. Exploring Consequences: Trace the implications of the student's hypothesis to see if contradictions emerge.) '
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001210 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1280
+%%EOF

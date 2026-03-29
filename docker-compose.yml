@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # ============================================================================
+  # 1. AI & Socratic RAG Service (FastAPI + LangChain + ChromaDB)
+  # ============================================================================
+  backend-ai:
+    build:
+      context: ./backend-ai
+      dockerfile: Dockerfile
+    container_name: learnforge-backend-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - CHROMA_PERSIST_DIRECTORY=/app/chroma_db
+      - CHROMA_COLLECTION_NAME=learnforge_educational_materials
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-text-embedding-3-small}
+      - LLM_MODEL=${LLM_MODEL:-gpt-4o-mini}
+    volumes:
+      - chroma_data:/app/chroma_db
+    networks:
+      - learnforge-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # 2. Main API Gateway & Auth Service (Node.js / Express)
+  # ============================================================================
+  backend-node:
+    build:
+      context: ./backend-node
+      dockerfile: Dockerfile
+    container_name: learnforge-backend-node
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      # Routes traffic via Docker internal DNS to the 'backend-ai' container
+      - AI_SERVICE_URL=http://backend-ai:8000
+      - CLIENT_ORIGINS=http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:5173
+      - JWT_SECRET=${JWT_SECRET:-learnforge_super_secret_jwt_key_2026}
+    depends_on:
+      backend-ai:
+        condition: service_healthy
+    networks:
+      - learnforge-net
+
+  # ============================================================================
+  # 3. Web Client Interface (React / Vite + Tailwind CSS)
+  # ============================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: learnforge-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # Vite internal proxy routes /api to the 'backend-node' container
+      - VITE_API_URL=http://backend-node:5000
+    depends_on:
+      - backend-node
+    networks:
+      - learnforge-net
+
+# ==============================================================================
+# Persistent Volumes & Bridge Network
+# ==============================================================================
+volumes:
+  chroma_data:
+    driver: local
+    name: learnforge_chroma_data
+
+networks:
+  learnforge-net:
+    driver: bridge
+    name: learnforge_network
